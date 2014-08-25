@@ -31,18 +31,17 @@ class L4FacebookToolsServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		\App::register('Thomaswelton\LaravelFacebook\LaravelFacebookServiceProvider');
-		\App::register('Jenssegers\Agent\AgentServiceProvider');
+		$this->app['mobiledetect'] = $this->app->share(function($app)
+        {
+            return new \Mobile_Detect;
+        });
 
-		// Shortcut so developers don't need to add an Alias in app/config/app.php
-		$this->app->booting(function()
-		{
-			$loader = \Illuminate\Foundation\AliasLoader::getInstance();
-			$loader->alias('Facebook', 'Thomaswelton\LaravelFacebook\Facades\Facebook');
-			$loader->alias('Agent', 'Jenssegers\Agent\Facades\Agent');
-		});
+		$this->app['facebook'] = $this->app->share(function($app)
+        {
+            return new Facebook;
+        });
 
-		\Route::filter( 'l4-facebook-tools', 'L4FacebookToolsFilter' );
+		\Route::filter( 'facebook-scope', 'L4FacebookToolsFilter' );
 	}
 
 	/**
@@ -52,7 +51,7 @@ class L4FacebookToolsServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array();
+		return array('facebook', 'mobiledetect');
 	}
 
 }

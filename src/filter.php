@@ -68,6 +68,10 @@ class L4FacebookToolsFilter {
 	 */
 	protected function shouldRedirectToFacebook()
 	{
+		if( !\Config::get('l4-facebook-tools::redirect') )
+		{
+			return false;
+		}
 		// If the request is from a mobile, don't redirect to facebook
 		if ($this->isRequestFromMobile())
 		{

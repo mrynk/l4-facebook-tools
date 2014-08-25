@@ -9,9 +9,10 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "illuminate/support": "4.1.*",
-        "jenssegers/agent": "*",
-        "thomaswelton/laravel-facebook": "dev-master"
+        "illuminate/support": "4.*",
+        "mobiledetect/mobiledetectlib": "*",
+        "facebook/php-sdk": "*",
+        "jwage/purl": "*"
     },
     "autoload": {
         "classmap": [
