@@ -205,6 +205,7 @@ class L4FacebookToolsFilter {
 	 */
 	protected function sendP3PHeaders()
 	{
+		\App::forgetMiddleware('Illuminate\Http\FrameGuard');
 		header('X-Frame-Options: GOFORIT');
 		header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
 	}

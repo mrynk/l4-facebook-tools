@@ -10,7 +10,8 @@ class Facebook extends \Facebook {
 	{
 		$config = array(
 			'appId' => Config::get( 'l4-facebook-tools::appId' ),
-			'secret' => Config::get( 'l4-facebook-tools::secret' )
+			'secret' => Config::get( 'l4-facebook-tools::secret' ),
+			'cookie' => true
 		);
 		parent::__construct( $config );
 	}
