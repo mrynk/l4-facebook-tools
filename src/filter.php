@@ -31,7 +31,7 @@ class L4FacebookToolsFilter {
 			Session::forget('done_facebook_redirect');
 		}
 
-		$this->signedRequest = Facebook::getSignedRequest();
+		$this->signedRequest = \App::make('facebook')->getSignedRequest();
 
 		// Redirect to facebook, with the original uri encoded in app_data, if not on mobile, not the facebook bot and
 		// we haven't already redirected to facebook.
@@ -137,7 +137,7 @@ class L4FacebookToolsFilter {
 			$url .= '?' . http_build_query ($queryArr);
 		}
 
-		$tabAppUrl = Facebook::getTabAppUrl();
+		$tabAppUrl = \App::make('facebook')->getTabAppUrl();
 
 		$tabAppUrl .= '&app_data=uri,'.urlencode($url);
 
