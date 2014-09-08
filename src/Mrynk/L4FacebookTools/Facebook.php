@@ -139,3 +139,5 @@ class Facebook extends \Facebook {
 		return ( !$md->isMobile() && !$md->isTablet() ) || !$this->getSignedRequest();
 	}
 }
+
+

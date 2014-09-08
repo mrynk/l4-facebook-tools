@@ -85,7 +85,7 @@ class L4FacebookToolsFilter {
 		}
 
 		// If we have done the redirect to facebook, don't do it again
-		if (Session::get('done_facebook_redirect'))
+		if ( \Input::get('fb') == 1/* || Session::get('done_facebook_redirect')*/ )
 		{
 			return false;
 		}
@@ -100,7 +100,7 @@ class L4FacebookToolsFilter {
 	 */
 	protected function isRequestFromMobile()
 	{
-		return \Agent::isMobile() || \Agent::isTablet();
+		return \App::make('mobiledetect')->isMobile() || \App::make('mobiledetect')->isTablet();
 	}
 
 	/**
@@ -110,8 +110,8 @@ class L4FacebookToolsFilter {
 	 */
 	protected function isRequestFromBot()
 	{
-		//return stripos($_SERVER['HTTP_USER_AGENT'], 'facebookexternalhit') !== false;
-		return \Agent::isRobot();
+		return stripos($_SERVER['HTTP_USER_AGENT'], 'facebookexternalhit') !== false;
+		//return false;
 	}
 
 	/**
@@ -139,7 +139,7 @@ class L4FacebookToolsFilter {
 
 		$tabAppUrl = \App::make('facebook')->getTabAppUrl();
 
-		$tabAppUrl .= '&app_data=uri,'.urlencode($url);
+		//$tabAppUrl .= '?app_data=uri,'.urlencode($url);
 
 		// Sets a variable in the session to say we've done the redirect, so the next time the page is loaded, which
 		// will be when it is loaded inside the iFrame on Facebook, the test to see whether the user should be
