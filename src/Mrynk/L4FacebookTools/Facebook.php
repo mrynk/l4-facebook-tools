@@ -44,8 +44,10 @@ class Facebook extends \Facebook {
 			// We dont know
 			return -1;
 		}else{
-			// Return the value Facebook told us
-			return $signedRequest['page']['liked'];
+			if( array_key_exists( 'liked', $signedRequest['page'] ) )
+				return $signedRequest['page']['liked'];
+			else
+				return 0;
 		}
 	}
 
